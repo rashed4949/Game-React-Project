@@ -5,7 +5,7 @@ A modern React-based web application for discovering games, fully containerized 
 ---
 
 ## 🌐 Live Demo
-👉 https://game-react-project-eveu.onrender.com/
+👉 https://game-react-project-dockerized.onrender.com/
 
 ---
 
