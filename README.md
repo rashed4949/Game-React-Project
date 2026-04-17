@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# 🚀 Game Hub – Dockerized React App with Cloud Deployment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based web application for discovering games, fully containerized using Docker and deployed on cloud infrastructure with automated deployment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
+👉 https://game-react-project-eveu.onrender.com/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📌 Overview
 
-- Configure the top-level `parserOptions` property like this:
+Game Hub is a frontend application built with React and TypeScript that integrates with external APIs to provide an interactive gaming discovery experience.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+This project has been enhanced with **DevOps best practices**, including containerization and cloud deployment, to ensure scalability, consistency, and reliable delivery.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
+
+## ⚙️ Features
+
+- 🎮 Browse and explore games using external APIs  
+- ⚡ Fast and responsive UI with modern React stack  
+- 🔄 Automated deployment on every Git push  
+- 🐳 Containerized application using Docker  
+- 🌍 Cloud deployment on Render  
+
+---
+
+## 🧱 Tech Stack
+
+### 👨‍💻 Frontend
+- React 18  
+- TypeScript  
+- Zustand (state management)  
+- React Query  
+- Chakra UI  
+
+### ⚙️ DevOps / Cloud
+- Docker  
+- Nginx (for serving production build)  
+- Render (cloud deployment)  
+- Git & GitHub  
+
+---
+
+## 🐳 Docker Setup
+
+This project uses a **multi-stage Docker build**:
+
+1. Build React app using Node.js  
+2. Serve production build using Nginx  
+
+### 📄 Dockerfile
+
+```dockerfile
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
